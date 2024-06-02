@@ -3,6 +3,21 @@ const router = express.Router();
 const Category = require("../models/category")
 
 
+router.put("/:id",async (req,res) => {
+    const category = await Category.findByIdUpdate(
+        req.params.id, {
+            name: req.body.name,
+            icon: req.body.icon,
+            color: req.body.color
+        },{new: true}
+    )
+
+    if(!category){
+        return res.status(400).send("the category cannot be created")
+    }
+    res.status(200).send(category)
+})
+
 router.get("/",async (req,res) => {
     const categoryList = await Category.find();
 
