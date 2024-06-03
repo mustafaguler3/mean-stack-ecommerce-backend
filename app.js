@@ -8,8 +8,6 @@ const cors = require("cors")
 require("dotenv/config")
 const api = process.env.API_URL;
 mongoose.connect(process.env.CONNECTION_STRING,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
     dbName: "eshop"
 })
 .then(() => {
@@ -28,13 +26,14 @@ app.use(morgan("tiny"))
 
 
 const productsRouter = require("./routers/productRouter");
+const categoryRouter = require("./routers/categoryRouter");
 
 app.use(api+"/products",productsRouter)
+app.use(api+"/categories",categoryRouter)
 
 
 
 
-
-app.listen(3000,() => {
-    console.log("server is running on port 3000")
+app.listen(process.env.PORT,() => {
+    console.log(`server is running on port ${process.env.PORT}`)
 })
