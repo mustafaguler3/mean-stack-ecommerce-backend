@@ -30,7 +30,15 @@ router.post("/",async (req,res) => {
 })
 
 router.get("/", async (req,res) => {
-    const productList = await Product.find().populate("category");
+    // /products?categories=111111,1111111
+    let filter = []
+    if(req.query.categories){
+        //filter = req.query.categories.split(",")
+        filter = {categories: req.query.categories.split(",")}
+    }
+
+
+    const productList = await Product.find(filter).populate("category");
     if(!productList){
         res.status(500).json({success: false})
     }

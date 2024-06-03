@@ -27,10 +27,11 @@ app.use(morgan("tiny"))
 
 const productsRouter = require("./routers/productRouter");
 const categoryRouter = require("./routers/categoryRouter");
+const userRouter = require("./routers/userRouter");
 
 app.use(api+"/products",productsRouter)
 app.use(api+"/categories",categoryRouter)
-
+app.use(api+"/users",userRouter);
 
 
 
