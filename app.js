@@ -5,6 +5,7 @@ const morgan = require("morgan")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const authJwt = require("./helpers/jwt")
+const errorHandler = require("./helpers/error-handler")
 
 require("dotenv/config")
 const api = process.env.API_URL;
@@ -25,6 +26,7 @@ app.use(bodyParser.json())
 // HTTP isteklerini loglamak için morgan'ı kullanın
 app.use(morgan("tiny"))
 app.use(authJwt())
+//app.use(errorHandler())
 
 const productsRouter = require("./routers/productRouter");
 const categoryRouter = require("./routers/categoryRouter");
