@@ -31,11 +31,12 @@ app.use(authJwt())
 const productsRouter = require("./routers/productRouter");
 const categoryRouter = require("./routers/categoryRouter");
 const userRouter = require("./routers/userRouter");
+const orderRouter = require("./routers/orderRouter")
 
 app.use(api+"/products",productsRouter)
 app.use(api+"/categories",categoryRouter)
 app.use(api+"/users",userRouter);
-
+app.use(api+"/orders",orderRouter)
 
 
 app.listen(process.env.PORT,() => {
