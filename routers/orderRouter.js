@@ -29,6 +29,33 @@ router.get("/:id",async (req,res) => {
     res.send(order)
 })
 
+router.put("/:id",async (req,res) => {
+    const order = await Order.findByIdAndUpdate(
+        req.params.id,
+        {
+            status: req.params.status
+        },
+        {new: true}
+    )
+
+    if(!order) {
+        return res.status(400).send("category cannot be created")
+    }
+    res.send(order)
+})
+
+router.delete("/:id",(req,res) => {
+    Order.findByIdAndRemove(req.params.id).then(order => {
+        if(order){
+            return res.status(200).json({success: true,message: "the order deleted"})
+        }else {
+            return res.status(404).json({success: false,message: "order not deleted"})
+        }
+    }).catch((err) => {
+        return res.status(400).json({success: false,error: err})
+    })
+})
+
 router.post("/",async (req,res) => {
 
     const orderItemsIds = req.body.orderItems.map(async orderItem => {
