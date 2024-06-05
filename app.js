@@ -26,6 +26,7 @@ app.use(bodyParser.json())
 // HTTP isteklerini loglamak için morgan'ı kullanın
 app.use(morgan("tiny"))
 app.use(authJwt())
+app.use("publis/uploads",express.static(__dirname))
 //app.use(errorHandler())
 
 const productsRouter = require("./routers/productRouter");
